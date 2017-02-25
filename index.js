@@ -3,6 +3,7 @@ var http = require('http'),
     express = require('express');
 
 var app = express();
+app.use(express.bodyParser());
 app.set('port', process.env.PORT || 3000); 
 
 app.get('/', function (req, res) {
@@ -10,9 +11,14 @@ app.get('/', function (req, res) {
 	res.json({'error': 'invalid request. Type v param as version required'});
 });
 
-app.get('/create_pod', function (req, res) {
+app.get('/healthcheck', function (req, res) {
+	res.json({'message': 'Now i cant see,...i just stare...ooohhh, im still alive!'});
+});
+
+app.post('/create_pod', function (req, res) {
 	console.log('Request received.');
-	var version = req.query.v;
+	console.log(req.body);
+	var version = req.param('version', null);
 	if (!version) {
 		res.json({'error': 'No v (version) parameter specified :('});
 		return;
