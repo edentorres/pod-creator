@@ -1,14 +1,14 @@
 
-var http = require('http');
-var express = require('express');
+//var http = require('http');
+//var express = require('express');
 
-var app = express();
+//var app = express();
 //app.set('port', process.env.PORT || 3000); 
 
-app.get('/', function (req, res) {
-	console.log('Invalid request received.');
-	res.json({'error': 'invalid request'});
-});
+//app.get('/', function (req, res) {
+//	console.log('Invalid request received.');
+//	res.json({'error': 'invalid request'});
+//});
 
 // app.get('/create_pod', function (req, res) {
 // 	console.log('Request received.');
@@ -20,6 +20,6 @@ app.get('/', function (req, res) {
 
 // });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+//http.createServer(app).listen(app.get('port'), function(){
+//  console.log('Express server listening on port ' + app.get('port'));
+//});
