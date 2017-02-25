@@ -18,13 +18,23 @@ app.get('/healthcheck', function (req, res) {
 app.post('/create_pod', function (req, res) {
 	console.log('Request received.');
 	console.log(req.body);
-	var version = req.param('version', null);
-	if (!version) {
-		res.json({'error': 'No v (version) parameter specified :('});
-		return;
-	} 
-	var title = 'Creating pod for version ' + version;
-    res.send('<html><body><h>' + title + '</h></body></html>');
+
+	var ref = req.param('ref', null);
+
+	// TODO : replace by regex
+	if (ref == 'refs/heads/master') {
+		console.log('Master branch updated.');
+		var version = req.param('version', null);
+		if (!version) {
+			res.json({'error': 'No v (version) parameter specified :('});
+			return;
+		} 
+		var title = 'Creating pod for version ' + version;
+    	res.send('<html><body><h>' + title + '</h></body></html>');
+	} else {
+		console.log('Pushed into ' + ref + ". No action required.");
+	}
+	
 });
 
 http.createServer(app).listen(app.get('port'), function(){
