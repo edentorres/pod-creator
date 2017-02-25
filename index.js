@@ -23,14 +23,13 @@ app.post('/create_pod', function (req, res) {
 
 	// TODO : replace by regex
 	if (ref == 'refs/heads/master') {
-		console.log('Master branch updated.');
 		var version = req.param('version', null);
 		if (!version) {
-			res.json({'error': 'No v (version) parameter specified :('});
+			res.json({'error': 'No version parameter specified :('});
 			return;
 		} 
 		var title = 'Creating pod for version ' + version;
-    	res.send('<html><body><h>' + title + '</h></body></html>');
+    	res.json({'message': 'Master updated. Creating pod version ' + version});
 	} else {
 		console.log('Pushed into ' + ref + ". No action required.");
 	}
