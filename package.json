@@ -1,9 +1,23 @@
-
 {
-  "dependencies": {
+  "name": "pod-creator",
+  "version": "1.0.0",
+  "description": "trigger pod creation",
+  "main": "index.js",
+   "dependencies": {
     "express": "3.3.4"
   },
   "scripts": {
-    "start": "node your-script.js"
-  } 
+    "start" : "index.js",  
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crisyelpegaso/pod-creator.git"
+  },
+  "author": "Cristina Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crisyelpegaso/pod-creator/issues"
+  },
+  "homepage": "https://github.com/crisyelpegaso/pod-creator#readme"
 }
