@@ -13,8 +13,11 @@ app.get('/', function (req, res) {
 app.get('/create_pod', function (req, res) {
 	console.log('Request received.');
 	var version = req.query.v;
+	if (!version) {
+		res.json({'error': 'No v (version) parameter specified :('});
+		return;
+	} 
 	var title = 'Creating pod for version ' + version;
-
     res.send('<html><body><h>' + title + '</h></body></html>');
 });
 
