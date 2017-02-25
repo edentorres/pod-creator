@@ -1,5 +1,6 @@
 
 //var http = require('http');
+
 //var express = require('express');
 
 //var app = express();
@@ -11,7 +12,7 @@
 //});
 
 // app.get('/create_pod', function (req, res) {
-// 	console.log('Request received.');
+ 	console.log('Request received.');
 // 	var version = req.query.v;
 // 	var title = 'Creating pod for version ' + version;
 
