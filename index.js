@@ -1,9 +1,8 @@
-
 var http = require('http'),
 	https   = require('https'),
     express = require('express'),
     readline  = require('readline'),
-    spawn = require('child_process'),
+    spawn = require('child_process').spawn,
     fs = require('fs');
 
 var app = express();
@@ -33,7 +32,7 @@ app.post('/create_pod', function (req, res) {
 				return;
 			} 
     		res.json({'message': 'Master updated. Creating pod version ' + version});
-    		createPod();
+    		runCreatePodScript();
 		});
 		
 	} else {
@@ -93,6 +92,6 @@ function extractPodVersionFromPodspec(callback){
   	});
 }
 
-function createPod(){
-	//const deploySh = spawn('sh', [ 'createPod.sh' ]);
+function runCreatePodScript(){
+	spawn('sh', ['createPod.sh'], {stdio: 'inherit'});
 }
