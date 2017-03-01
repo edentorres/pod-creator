@@ -54,7 +54,7 @@ function getPodVersion(callback) {
   	  method    : 'GET'
 	};
 
-	var file = fs.createWriteStream("podspec.temp");
+	var file = fs.createWriteStream("MercadoPagoSDK.podspec");
 
 	// TODO : no need to download file locally
 	var req = https.request(options, function(res) {
