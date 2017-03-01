@@ -32,7 +32,8 @@ app.post('/create_pod', function (req, res) {
 				return;
 			} 
     		res.json({'message': 'Master updated. Creating pod version ' + version});
-    		runCreatePodScript();
+    		// Run createPod.sh with version found
+    		spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
 		});
 		
 	} else {
@@ -90,8 +91,4 @@ function extractPodVersionFromPodspec(callback){
   	}).on('close', function() {
     	
   	});
-}
-
-function runCreatePodScript(){
-	spawn('sh', ['createPod.sh'], {stdio: 'inherit'});
 }
