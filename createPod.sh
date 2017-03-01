@@ -19,6 +19,8 @@ if [ "$#" -eq 2 ]
 
 fi
 
+gem install cocoapods
+
 echo "=========================================="
 echo "1) Validate .podspec --allow-warnings"
 echo "=========================================="
