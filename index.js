@@ -75,7 +75,7 @@ function getPodVersion(callback) {
 
 function extractPodVersionFromPodspec(callback){
 	readline.createInterface({
-    	input     : fs.createReadStream("podspec.temp"),
+    	input     : fs.createReadStream("MercadoPagoSDK.podspec"),
     	terminal  : true
   	}).on('line', function(line) {
     	var idx = line.indexOf("s.version");
