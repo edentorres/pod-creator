@@ -24,9 +24,19 @@ app.post('/create_pod', function (req, res) {
 
 	var ref = req.param('ref', null);
 
+	var version = req.param('ref', null);		
+	if (version) {
+		res.json({'message': 'Master updated. Creating pod version ' + version});
+    		// Run createPod.sh with version found
+    	spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
+    	return;
+
+	}
+
 	// TODO : replace by regex
 	if (ref == 'refs/heads/master') {
-		var version = getPodVersion(function(version) {
+
+		getPodVersion(function(version) {
 			if (!version) {
 				res.json({'error': 'No version parameter specified :('});
 				return;
@@ -50,7 +60,7 @@ function getPodVersion(callback) {
 	var options = {
 	  hostname  : 'raw.githubusercontent.com',
   	  port      : 443,
-  	  path      : '/mercadopago/px-ios/development/MercadoPagoSDK.podspec',
+  	  path      : '/mercadopago/px-ios/master/MercadoPagoSDK.podspec',
   	  method    : 'GET'
 	};
 
