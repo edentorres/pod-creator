@@ -24,16 +24,6 @@ app.post('/create_pod', function (req, res) {
 
 	var ref = req.param('ref', null);
 
-	var version = req.param('version', null);	
-	console.log("!" + version);	
-	if (version) {
-		res.json({'message': 'Master updated. Creating pod version ' + version});
-    		// Run createPod.sh with version found
-    	spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
-    	return;
-
-	}
-
 	// TODO : replace by regex
 	if (ref == 'refs/heads/master') {
 
