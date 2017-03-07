@@ -24,7 +24,8 @@ app.post('/create_pod', function (req, res) {
 
 	var ref = req.param('ref', null);
 
-	var version = req.param('ref', null);		
+	var version = req.param('version', null);	
+	console.log("!" + version);	
 	if (version) {
 		res.json({'message': 'Master updated. Creating pod version ' + version});
     		// Run createPod.sh with version found
