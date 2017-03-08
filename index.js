@@ -80,6 +80,7 @@ function extractPodVersionFromPodspec(callback){
     	input     : fs.createReadStream("MercadoPagoSDK.podspec"),
     	terminal  : true
   	}).on('line', function(line) {
+  		console.log(line);
     	var idx = line.indexOf("s.version");
     	if (idx != -1 && idx < 5) {
     		var vBeggining = line.lastIndexOf("=")+3;
