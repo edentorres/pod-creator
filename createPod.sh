@@ -45,6 +45,7 @@ echo "=========================================="
 echo "2) Creating credentials ... this can get nasty..."
 echo "=========================================="
 
+eval `ssh-agent -s`
 ssh-add -K ~/.ssh/id_rsa_cyep
 
 echo "=========================================="
