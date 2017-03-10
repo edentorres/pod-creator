@@ -92,8 +92,10 @@ function getGithubRepo() {
 			'./tmp-px-ios', {
 			checkout: 'master' },
 			function(err) {
-				if (err) error(err);
-				else {
+				if (err) {
+					console.log("Error cloning repo : " + err);	
+					error(err);
+				} else {
 					complete();
 				} 
 			});
