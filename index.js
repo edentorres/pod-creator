@@ -29,25 +29,24 @@ app.post('/create_pod', function (req, res) {
 
 	// TODO : replace by regex
 	if (ref == 'refs/heads/master') {
-
-		
+		res.json({'message': 'Master updated. Verify logs for pod creation'});
 		// 1. get github repo
-		// getGithubRepo().then(function (res){
-  //   		console.log("Clone complete!");	
+		getGithubRepo().then(function (res){
+    		console.log("Clone complete!");	
 
     		// 2. get podspec version
 			extractPodVersionFromPodspec().then(function(version){
 				if (!version) {
-					res.json({'error': 'No version parameter specified :('});
+					console.log("ERROR : no version found! :(");						
 					return;
 				} 
-    			res.json({'message': 'Master updated. Verify logs for pod creation with version ' + version});
+   //  			
 
-    			// 3. run script
-    			spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
-    			return;
+   //  			// 3. run script
+     			spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
+     			return;
 			});
-  		// });
+  		});
 		
 	} else {
 		console.log('Pushed into ' + ref + ". No action required.");
@@ -60,12 +59,12 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 function extractPodVersionFromPodspec(){
+	// TODO : handle error
 	return new Promise(function (complete, error){
 		readline.createInterface({
     		input     : fs.createReadStream("tmp-px-ios/MercadoPagoSDK.podspec"),
     		terminal  : true
   		}).on('line', function(line) {
-  			console.log(line);
     		var idx = line.indexOf("s.version");
     		if (idx != -1 && idx < 5) {
     			var vBeggining = line.lastIndexOf("=")+3;
