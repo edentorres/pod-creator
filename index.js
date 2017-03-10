@@ -3,11 +3,14 @@ var http = require('http'),
     express = require('express'),
     readline  = require('readline'),
     spawn = require('child_process').spawn,
-    fs = require('fs');
+    fs = require('fs'),
+    clone = require('git-clone');
 
 var app = express();
 app.use(express.bodyParser());
 app.set('port', process.env.PORT || 3000); 
+
+
 
 app.get('/', function (req, res) {
 	console.log('Invalid request received.');
@@ -27,15 +30,24 @@ app.post('/create_pod', function (req, res) {
 	// TODO : replace by regex
 	if (ref == 'refs/heads/master') {
 
-		getPodVersion(function(version) {
-			if (!version) {
-				res.json({'error': 'No version parameter specified :('});
-				return;
-			} 
-    		res.json({'message': 'Master updated. Creating pod version ' + version});
-    		// Run createPod.sh with version found
-    		spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
-		});
+		
+		// 1. get github repo
+		// getGithubRepo().then(function (res){
+  //   		console.log("Clone complete!");	
+
+    		// 2. get podspec version
+			extractPodVersionFromPodspec().then(function(version){
+				if (!version) {
+					res.json({'error': 'No version parameter specified :('});
+					return;
+				} 
+    			res.json({'message': 'Master updated. Verify logs for pod creation with version ' + version});
+
+    			// 3. run script
+    			spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
+    			return;
+			});
+  		// });
 		
 	} else {
 		console.log('Pushed into ' + ref + ". No action required.");
@@ -47,50 +59,46 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-function getPodVersion(callback) {
-	var options = {
-	  hostname  : 'raw.githubusercontent.com',
-  	  port      : 443,
-  	  path      : '/mercadopago/px-ios/master/MercadoPagoSDK.podspec',
-  	  method    : 'GET'
-	};
-
-	var file = fs.createWriteStream("MercadoPagoSDK.podspec");
-
-	// TODO : no need to download file locally
-	var req = https.request(options, function(res) {
-  		console.log("statusCode: ", res.statusCode);
-  		res.on('data', function(d) {
-	  		file.write(d);
-			extractPodVersionFromPodspec(callback);
-  		});
-
+function extractPodVersionFromPodspec(){
+	return new Promise(function (complete, error){
+		readline.createInterface({
+    		input     : fs.createReadStream("tmp-px-ios/MercadoPagoSDK.podspec"),
+    		terminal  : true
+  		}).on('line', function(line) {
+  			console.log(line);
+    		var idx = line.indexOf("s.version");
+    		if (idx != -1 && idx < 5) {
+    			var vBeggining = line.lastIndexOf("=")+3;
+    			//TODO : version should be until new line - 2
+				var vEnding = line.lastIndexOf("=")+8;
+      			var version = line.substring(vBeggining,vEnding);
+				console.log("Version " + version + " found");
+				complete(version);
+    	}})
+    	.on('close', function() {
+    	
+ 		})
+ 		.on('error', function() {
+    		
+ 		});
 
 	});
-	req.end();
 
-	req.on('error', function(e) {
-  		console.error(e);
+	
+}
+
+function getGithubRepo() {
+	return new Promise(function (complete, error){
+		clone('git@github.com:mercadopago/px-ios.git', 
+			'./tmp-px-ios', {
+			checkout: 'master' },
+			function(err) {
+				if (err) error(err);
+				else {
+					complete();
+				} 
+			});
 	});
 	
 }
 
-function extractPodVersionFromPodspec(callback){
-	readline.createInterface({
-    	input     : fs.createReadStream("MercadoPagoSDK.podspec"),
-    	terminal  : true
-  	}).on('line', function(line) {
-  		console.log(line);
-    	var idx = line.indexOf("s.version");
-    	if (idx != -1 && idx < 5) {
-    		var vBeggining = line.lastIndexOf("=")+3;
-    		//TODO : version should be until new line - 2
-			var vEnding = line.lastIndexOf("=")+8;
-      		var version = line.substring(vBeggining,vEnding);
-			console.log("Version " + version + " found");
-			callback(version);
-    	}
-  	}).on('close', function() {
-    	
-  	});
-}

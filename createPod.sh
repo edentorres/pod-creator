@@ -10,6 +10,7 @@ fi
 VERSION=$1
 PROJECT="MercadoPagoSDK"
 PODSPEC_FILE="$PROJECT.podspec"
+PROJECT_PATH="tmp-px-ios"
 ## Default branch is master
 GIT_BRANCH="master"
 
@@ -19,20 +20,13 @@ if [ "$#" -eq 2 ]
 
 fi
 
-echo "=========================================="
-echo "1) Copy current repo"
-echo "=========================================="
-
-git clone git@github.com:mercadopago/px-ios.git
-CLONE_STATUS=$?
-if [ $CLONE_STATUS -ne 0 ]
+cd $PROJECT_PATH
+PATH_STATUS=$?
+if [ $PATH_STATUS -ne 0 ]
 	then
-		echo "Could not clone $PROJECT!"
+		echo "Could not find $PROJECT_PATH folder :("
 		exit 0
 fi
-cd px-ios
-git checkout master
-git pull origin master
 
 echo "=========================================="
 echo "1) Validate .podspec --allow-warnings"
