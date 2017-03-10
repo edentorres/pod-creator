@@ -7,7 +7,7 @@ if [ $# -eq 0 ]
     exit 0
 fi
 
-VERSION=$1
+VERSION="test_tag"
 PROJECT="MercadoPagoSDK"
 PODSPEC_FILE="$PROJECT.podspec"
 PROJECT_PATH="tmp-px-ios"
