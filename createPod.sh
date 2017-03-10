@@ -23,13 +23,13 @@ echo "=========================================="
 echo "1) Copy current repo"
 echo "=========================================="
 
-##git clone git@github.com:mercadopago/px-ios.git
-##STATUS=$?
-##if [ $STATUS -ne 0 ]
-##	then
-##		echo "Could not clone $PROJECT!"
-##		exit 0
-##fi
+git clone git@github.com:mercadopago/px-ios.git
+CLONE_STATUS=$?
+if [ $CLONE_STATUS -ne 0 ]
+	then
+		echo "Could not clone $PROJECT!"
+		exit 0
+fi
 cd px-ios
 git checkout master
 git pull origin master
