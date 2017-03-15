@@ -46,7 +46,7 @@ echo "2) Creating credentials ... this can get nasty..."
 echo "=========================================="
 
 eval `ssh-agent -s`
-ssh-add -k ~/.ssh/id_rsa_cyep
+ssh-add -k id_rsa_cyep
 
 echo "=========================================="
 echo "2) Create tag for version $VERSION from $GIT_BRANCH branch"

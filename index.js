@@ -88,7 +88,7 @@ function extractPodVersionFromPodspec(){
 
 function getGithubRepo() {
 	return new Promise(function (complete, error){
-		clone('git://github.com/mercadopago/px-ios.git', 
+		clone('git@github.com:mercadopago/px-ios.git', 
 			'./tmp-px-ios', {
 			checkout: 'master' },
 			function(err) {
