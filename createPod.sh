@@ -54,7 +54,7 @@ echo "=========================================="
 
 git checkout $GIT_BRANCH
 git tag $VERSION
-git push git@github.com:mercadopago/px-ios.git $VERSION
+git push git://github.com/mercadopago/px-ios.git $VERSION
 PUSH_STATUS=$?
 
 if [ $PUSH_STATUS -ne 0 ]
