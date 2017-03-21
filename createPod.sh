@@ -40,21 +40,13 @@ if [ $STATUS -ne 0 ]
 		exit 0
 fi
 
-
-echo "=========================================="
-echo "2) Creating credentials ... this can get nasty..."
-echo "=========================================="
-
-eval `ssh-agent -s`
-ssh-add -k id_rsa_cyep
-
 echo "=========================================="
 echo "2) Create tag for version $VERSION from $GIT_BRANCH branch"
 echo "=========================================="
 
 git checkout $GIT_BRANCH
 git tag $VERSION
-git push git://github.com/mercadopago/px-ios.git $VERSION
+git push https://github.com/mercadopago/px-ios.git $VERSION
 PUSH_STATUS=$?
 
 if [ $PUSH_STATUS -ne 0 ]
