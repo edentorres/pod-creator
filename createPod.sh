@@ -46,7 +46,9 @@ echo "=========================================="
 
 git checkout $GIT_BRANCH
 git tag $VERSION
-git push https://github.com/mercadopago/px-ios.git $VERSION
+git clone https://scuzzlebuzzle:<MYTOKEN>@github.com/scuzzlebuzzle/ol3-1.git --branch=gh-pages gh-pages
+
+git push https://6694016343d016928505f85a06d1dbf633760f94@github.com/mercadopago/px-ios.git $VERSION
 PUSH_STATUS=$?
 
 if [ $PUSH_STATUS -ne 0 ]

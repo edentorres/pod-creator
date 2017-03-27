@@ -98,6 +98,9 @@ function getGithubRepo() {
 				} else {
 					complete();
 				} 
+			}).catch(function (err) {
+				console.log("Error cloning repo : " + err);	
+  				console.log(err);
 			});
 	});
 	
