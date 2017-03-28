@@ -40,11 +40,13 @@ app.post('/create_pod', function (req, res) {
 					console.log("ERROR : no version found! :(");						
 					return;
 				} 
-   //  			
-
-   //  			// 3. run script
-     			spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
-     			return;
+   
+     			// 3. run script
+     			runScript().then(function(){
+     				console.log("Script ended successfully");
+     										
+     				return;
+     			});
 			});
   		});
 		
@@ -100,9 +102,12 @@ function getGithubRepo() {
 				} 
 			}).catch(function (err) {
 				console.log("Error cloning repo : " + err);	
-  				console.log(err);
 			});
 	});
-	
 }
 
+function runScript() {
+	return new Promise(function (complete, error){
+		spawn('sh', ['createPod.sh', version], {stdio: 'inherit'});
+	});
+}

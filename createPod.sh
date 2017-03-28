@@ -41,21 +41,25 @@ if [ $STATUS -ne 0 ]
 fi
 
 echo "=========================================="
-echo "2) Create tag for version $VERSION from $GIT_BRANCH branch"
+echo "2) WARNING ::: TAG CREATION MISSING, NEED TO PUSH LOCALLY FROM MASTER"
 echo "=========================================="
 
-git checkout $GIT_BRANCH
-git tag $VERSION
-git clone https://scuzzlebuzzle:<MYTOKEN>@github.com/scuzzlebuzzle/ol3-1.git --branch=gh-pages gh-pages
 
-git push https://6694016343d016928505f85a06d1dbf633760f94@github.com/mercadopago/px-ios.git $VERSION
-PUSH_STATUS=$?
+# echo "=========================================="
+# echo "Create tag for version $VERSION from $GIT_BRANCH branch""
+# echo "=========================================="
 
-if [ $PUSH_STATUS -ne 0 ]
-	then
-		echo "Error ocurred pushing tag."
-		exit 0
-fi
+# git checkout $GIT_BRANCH
+# git tag $VERSION
+
+# git push https://<token>@github.com/mercadopago/px-ios.git $VERSION
+# PUSH_STATUS=$?
+
+# if [ $PUSH_STATUS -ne 0 ]
+# 	then
+# 		echo "Error ocurred pushing tag."
+# 		exit 0
+# fi
 
 
 echo "=========================================="
