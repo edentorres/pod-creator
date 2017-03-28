@@ -44,7 +44,7 @@ app.post('/create_pod', function (req, res) {
      			// 3. run script
      			runScript().then(function(){
      				console.log("Script ended successfully");
-     										
+
      				return;
      			});
 			});
@@ -90,7 +90,7 @@ function extractPodVersionFromPodspec(){
 
 function getGithubRepo() {
 	return new Promise(function (complete, error){
-		clone('https://github.com/mercadopago/px-ios.git', 
+		clone('git://github.com/mercadopago/px-ios.git', 
 			'./tmp-px-ios', {
 			checkout: 'master' },
 			function(err) {
