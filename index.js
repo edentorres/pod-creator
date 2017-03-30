@@ -109,5 +109,19 @@ function getGithubRepo() {
 		}).catch(function(err) {
 			console.log("Error cloning repo : " + err);	
 		});
+		// clone(repositoryUrl, 
+		// 	'./tmp-px-ios', {
+		// 	checkout: 'master' },
+		// 	function(err) {
+		// 		if (err) {
+		// 			console.log("Error cloning repo : " + err);	
+		// 			error(err);
+		// 		} else {
+		// 			complete();
+		// 		} 
+		// 	}).catch(function (err) {
+		// 		console.log("Error cloning repo : " + err);	
+		// 		error(err)
+		// 	});
 	});
 }
