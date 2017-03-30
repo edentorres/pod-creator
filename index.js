@@ -4,9 +4,13 @@ var http = require('http'),
     readline  = require('readline'),
     spawn = require('child_process').spawn,
     fs = require('fs'),
+    nodeGit = require('nodegit'),
     clone = require('git-clone');
 
+var repositoryUrl = 'git@github.com:mercadopago/px-ios';
+var tempPath = 'tmp-px-ios';
 var app = express();
+var podspecFile = 'MercadoPagoSDK.podspec';
 app.use(express.bodyParser());
 app.set('port', process.env.PORT || 3000); 
 
@@ -64,7 +68,7 @@ app.post('/create_pod', function (req, res) {
 function extractPodVersionFromPodspec(){
 	return new Promise(function (complete, error){
 		readline.createInterface({
-    		input     : fs.createReadStream("tmp-px-ios/MercadoPagoSDK.podspec"),
+    		input     : fs.createReadStream(tempPath + '/' + podspecFile),
     		terminal  : true
   		}).on('line', function(line) {
     		var idx = line.indexOf("s.version");
@@ -84,21 +88,26 @@ function extractPodVersionFromPodspec(){
 	});	
 }
 
+var cloneOpts = {
+  fetchOpts: {
+    callbacks: {
+      credentials: function(url, userName) {
+        return nodeGit.Cred.sshKeyFromAgent(userName);
+      }
+    }
+  }
+};
+
 function getGithubRepo() {
 	return new Promise(function (complete, error){
-		clone('git@github.com:mercadopago/px-ios.git', 
-			'./tmp-px-ios', {
-			checkout: 'master' },
-			function(err) {
-				if (err) {
-					console.log("Error cloning repo : " + err);	
-					error(err);
-				} else {
-					complete();
-				} 
-			}).catch(function (err) {
-				console.log("Error cloning repo : " + err);	
-				error(err)
-			});
+		nodeGit.Clone(repositoryUrl, 
+			'./' + tempPath,
+			cloneOpts)
+  		.then(function(repo) {
+			console.log("Repository Cloned Successfully!");	
+			complete();
+		}).catch(function(err) {
+			console.log("Error cloning repo : " + err);	
+		});
 	});
 }

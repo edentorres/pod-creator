@@ -28,17 +28,17 @@ if [ $PATH_STATUS -ne 0 ]
 		exit 0
 fi
 
-echo "=========================================="
-echo "1) Validate .podspec --allow-warnings"
-echo "=========================================="
+# echo "=========================================="
+# echo "1) Validate .podspec --allow-warnings"
+# echo "=========================================="
 
-pod lib lint --allow-warnings
-STATUS=$?
-if [ $STATUS -ne 0 ]
-	then
-		echo "Error ocurred. Validate podspec."
-		exit 0
-fi
+# pod lib lint --allow-warnings
+# STATUS=$?
+# if [ $STATUS -ne 0 ]
+# 	then
+# 		echo "Error ocurred. Validate podspec."
+# 		exit 0
+# fi
 
 # echo "=========================================="
 # echo "2) WARNING ::: TAG CREATION MISSING, NEED TO PUSH LOCALLY FROM MASTER"
@@ -46,25 +46,25 @@ fi
 
 
 echo "=========================================="
-echo "Create tag for version $VERSION from $GIT_BRANCH branch""
+echo "Create tag for version $VERSION from $GIT_BRANCH branch"
 echo "=========================================="
 
-# git checkout $GIT_BRANCH
-# git tag $VERSION
+git checkout $GIT_BRANCH
+git tag $VERSION
 
-# git push origin $VERSION
-# PUSH_STATUS=$?
+git push origin $VERSION
+PUSH_STATUS=$?
 
-# if [ $PUSH_STATUS -ne 0 ]
-# 	then
-# 		echo "Error ocurred pushing tag."
-# 		exit 0
-# fi
+if [ $PUSH_STATUS -ne 0 ]
+	then
+		echo "Error ocurred pushing tag."
+		exit 0
+fi
 
 
-echo "=========================================="
-echo "3) Push podspec into trunk/Specs"
-echo "=========================================="
+# echo "=========================================="
+# echo "3) Push podspec into trunk/Specs"
+# echo "=========================================="
 # pod trunk push $PODSPEC_FILE --allow-warnings --verbose
 # POD_TRUNK_STATUS=$?
 
@@ -72,6 +72,8 @@ echo "=========================================="
 # 	then
 # 		echo "Error ocurred pushing pod into trunk."
 # 		exit 0
+# else 
+#
 # fi
 
 
