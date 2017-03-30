@@ -2,15 +2,16 @@
   "name": "pod-creator",
   "version": "1.0.0",
   "description": "trigger pod creation",
-   "dependencies": {
+  "dependencies": {
     "express": "3.3.4",
-    "git-clone" : "0.1.0"
+    "git-clone": "0.1.0",
+    "nodegit": "0.14.1"
   },
   "engines": {
     "node": "4.5.0"
   },
   "scripts": {
-    "start" : "node index.js",
+    "start": "node index.js",
     "test": "test"
   },
   "repository": {
