@@ -11,7 +11,7 @@
     "node": "4.5.0"
   },
   "scripts": {
-    "start": "apt-get install -y libstdc++-4.9-dev && node index.js",
+    "start": "node index.js",
     "test": "test"
   },
   "repository": {
