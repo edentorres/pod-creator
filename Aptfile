@@ -1,5 +1,2 @@
-libc6
-libfontforge1
-libgcc1
-libjs-pdf
-http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-5/libstdc++6_5.3.1-5ubuntu2_amd64.deb
+http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-4.9/gcc-4.9_4.9.2-10ubuntu13_amd64.deb
+http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-4.9/libstdc%2b%2b6_4.9.2-10ubuntu13_amd64.deb
