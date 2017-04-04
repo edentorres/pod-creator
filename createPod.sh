@@ -7,7 +7,7 @@ if [ $# -eq 0 ]
     exit 0
 fi
 
-VERSION="test_tag"
+VERSION=$1
 PROJECT="MercadoPagoSDK"
 PODSPEC_FILE="$PROJECT.podspec"
 PROJECT_PATH="tmp-px-ios"
@@ -20,7 +20,6 @@ if [ "$#" -eq 2 ]
 
 fi
 
-ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 cd $PROJECT_PATH
 PATH_STATUS=$?
 if [ $PATH_STATUS -ne 0 ]
@@ -33,20 +32,20 @@ echo "=========================================="
 echo "1) Validate .podspec --allow-warnings"
 echo "=========================================="
 
-# pod lib lint --allow-warnings
-# STATUS=$?
-# if [ $STATUS -ne 0 ]
-# 	then
-# 		echo "Error ocurred. Validate podspec."
-# 		exit 0
-# fi
+pod lib lint --allow-warnings
+STATUS=$?
+if [ $STATUS -ne 0 ]
+	then
+		echo "Error ocurred. Validate podspec."
+		exit 0
+fi
 
 
 # echo "=========================================="
 # echo "Create tag for version $VERSION from $GIT_BRANCH branch"
 # echo "=========================================="
 
-git clone git@github.com:mercadopago/px-ios.git
+# git clone git@github.com:mercadopago/px-ios.git
 # git remote set-url origin https://github.com/mercadopago/px-ios.git
 # git checkout $GIT_BRANCH
 # git tag $VERSION
@@ -61,19 +60,19 @@ git clone git@github.com:mercadopago/px-ios.git
 # fi
 
 
-# echo "=========================================="
-# echo "3) Push podspec into trunk/Specs"
-# echo "=========================================="
-# pod trunk push $PODSPEC_FILE --allow-warnings --verbose
-# POD_TRUNK_STATUS=$?
+echo "=========================================="
+echo "3) Push podspec into trunk/Specs"
+echo "=========================================="
+pod trunk push $PODSPEC_FILE --allow-warnings --verbose
+POD_TRUNK_STATUS=$?
 
-# if [ $POD_TRUNK_STATUS -ne 0 ]
-# 	then
-# 		echo "Error ocurred pushing pod into trunk."
-# 		exit 0
-# else 
-#
-# fi
+if [ $POD_TRUNK_STATUS -ne 0 ]
+	then
+		echo "Error ocurred pushing pod into trunk."
+		exit 0
+else 
+
+fi
 
 
 echo "=========================================="
