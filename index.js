@@ -8,7 +8,7 @@ var http = require('http'),
     clone = require('git-clone');
 
 var repositoryUrl = 'git@github.com:mercadopago/px-ios';
-var tempPath = 'tmp-px-ios';
+var tempPath = require("path").join(__dirname, 'tmp-px-ios');
 var app = express();
 var podspecFile = 'MercadoPagoSDK.podspec';
 app.use(express.bodyParser());
@@ -91,7 +91,8 @@ function extractPodVersionFromPodspec(){
 var cloneOpts = {
   fetchOpts: {
     callbacks: {
-      credentials: function(url, userName) {
+    	certificateCheck: function() { return 1; },
+      	credentials: function(url, userName) {
         return nodeGit.Cred.sshKeyFromAgent(userName);
       }
     }
