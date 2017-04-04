@@ -28,9 +28,9 @@ if [ $PATH_STATUS -ne 0 ]
 		exit 0
 fi
 
-# echo "=========================================="
-# echo "1) Validate .podspec --allow-warnings"
-# echo "=========================================="
+echo "=========================================="
+echo "1) Validate .podspec --allow-warnings"
+echo "=========================================="
 
 # pod lib lint --allow-warnings
 # STATUS=$?
@@ -40,28 +40,24 @@ fi
 # 		exit 0
 # fi
 
-# echo "=========================================="
-# echo "2) WARNING ::: TAG CREATION MISSING, NEED TO PUSH LOCALLY FROM MASTER"
-# echo "=========================================="
 
-
-echo "=========================================="
-echo "Create tag for version $VERSION from $GIT_BRANCH branch"
-echo "=========================================="
+# echo "=========================================="
+# echo "Create tag for version $VERSION from $GIT_BRANCH branch"
+# echo "=========================================="
 
 git clone git@github.com:mercadopago/px-ios.git
-git remote set-url origin https://github.com/mercadopago/px-ios.git
-git checkout $GIT_BRANCH
-git tag $VERSION
+# git remote set-url origin https://github.com/mercadopago/px-ios.git
+# git checkout $GIT_BRANCH
+# git tag $VERSION
 
-git push origin $VERSION
-PUSH_STATUS=$?
+# git push origin $VERSION
+# PUSH_STATUS=$?
 
-if [ $PUSH_STATUS -ne 0 ]
-	then
-		echo "Error ocurred pushing tag."
-		exit 0
-fi
+# if [ $PUSH_STATUS -ne 0 ]
+# 	then
+# 		echo "Error ocurred pushing tag."
+# 		exit 0
+# fi
 
 
 # echo "=========================================="
