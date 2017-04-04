@@ -49,6 +49,7 @@ echo "=========================================="
 echo "Create tag for version $VERSION from $GIT_BRANCH branch"
 echo "=========================================="
 
+git remote set-url origin https://github.com/mercadopago/px-ios.git
 git checkout $GIT_BRANCH
 git tag $VERSION
 

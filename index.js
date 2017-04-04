@@ -91,7 +91,7 @@ function extractPodVersionFromPodspec(){
 var cloneOpts = {
   fetchOpts: {
     callbacks: {
-    	certificateCheck: function() { return 1; },
+    	certificateCheck: function() { return 1; }
       	credentials: function(url, userName) {
         return nodeGit.Cred.sshKeyFromAgent(userName);
       }
