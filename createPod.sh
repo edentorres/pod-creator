@@ -20,6 +20,7 @@ if [ "$#" -eq 2 ]
 
 fi
 
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 cd $PROJECT_PATH
 PATH_STATUS=$?
 if [ $PATH_STATUS -ne 0 ]
