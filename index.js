@@ -64,7 +64,6 @@ app.post('/create_pod', function (req, res) {
 	return;
 });
 
-
 function extractPodVersionFromPodspec(){
 	return new Promise(function (complete, error){
 		readline.createInterface({
@@ -101,6 +100,10 @@ var cloneOpts = {
 
 function getGithubRepo() {
 	return new Promise(function (complete, error){
+		if (fs.existsSync(tempPath)) {
+			fs.unlinkSync(tempPath);
+		}
+
 		nodeGit.Clone(repositoryUrl, 
 			'./' + tempPath,
 			cloneOpts)
@@ -126,3 +129,6 @@ function getGithubRepo() {
 		// 	});
 	});
 }
+
+var MY_SLACK_WEBHOOK_URL = 'https://paymentexperience.slack.com/services/hooks/incoming-webhook?token=myToken';
+var slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
