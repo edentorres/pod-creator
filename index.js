@@ -7,8 +7,8 @@ var http = require('http'),
     nodeGit = require('nodegit'),
     clone = require('git-clone');
 
-var repositoryUrl = 'git@github.com:mercadopago/px-ios';
-var tempPath = require("path").join(__dirname, 'tmp-px-ios');
+var repositoryUrl = 'https://github.com/mercadopago/px-ios.git';
+var tempPath = 'tmp-px-ios';
 var app = express();
 var podspecFile = 'MercadoPagoSDK.podspec';
 app.use(express.bodyParser());
