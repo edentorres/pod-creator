@@ -88,14 +88,15 @@ function extractPodVersionFromPodspec(){
 }
 
 var cloneOpts = {
-  fetchOpts: {
-    callbacks: {
-    	certificateCheck: function() { return 1; },
-      	credentials: function(url, userName) {
-        return nodeGit.Cred.sshKeyFromAgent(userName);
-      }
-    }
-  }
+	checkoutBranch : 'master',
+  	fetchOpts: {
+    	callbacks: {
+    		certificateCheck: function() { return 1; },
+      		credentials: function(url, userName) {
+        		return nodeGit.Cred.sshKeyFromAgent(userName);
+      		}
+    	}
+  	}
 };
 
 function getGithubRepo() {
