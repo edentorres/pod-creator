@@ -63,6 +63,7 @@ fi
 echo "=========================================="
 echo "3) Push podspec into trunk/Specs"
 echo "=========================================="
+pod trunk register crisyelpegaso@gmail.com 'Pod Service' --description='macbook pro'
 pod trunk push $PODSPEC_FILE --allow-warnings --verbose
 POD_TRUNK_STATUS=$?
 
@@ -70,8 +71,6 @@ if [ $POD_TRUNK_STATUS -ne 0 ]
 	then
 		echo "Error ocurred pushing pod into trunk."
 		exit 0
-else 
-
 fi
 
 
