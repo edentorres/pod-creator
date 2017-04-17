@@ -9,14 +9,11 @@
     "slack-notify" : "0.1.6"
   },
   "engines": {
-    "node": "4.5.0"
+    "node": "6.9.5"
   },
   "scripts": {
     "start": "node index.js",
     "test": "test"
-  },
-  "repository": {
-    "type": "git",
   },
   "license": "ISC",
   "bugs": {
