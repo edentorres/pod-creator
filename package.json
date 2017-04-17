@@ -17,12 +17,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crisyelpegaso/pod-creator.git"
   },
-  "author": "Cristina Rodriguez",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/crisyelpegaso/pod-creator/issues"
   },
-  "homepage": "https://github.com/crisyelpegaso/pod-creator#readme"
 }
